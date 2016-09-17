@@ -1,10 +1,10 @@
 <table class="table striped hovered cell-hovered border bordered">
     <tr>
-        <th class="sortable-column">ID</th>
-        <th class="sortable-column">Adresse</th>
-        <th class="sortable-column">Einheiten</th>
-        <th class="sortable-column">Frei</th>
-        <th class="sortable-column">Besitzer</th>
+        <th>ID</th>
+        <th>Adresse</th>
+        <th>Einheiten</th>
+        <th>Frei</th>
+        <th>Besitzer</th>
         <th>Aktion</th>
     </tr>
     <?php foreach ($objects as $object): ?>
@@ -13,8 +13,11 @@
             <td><?php echo $object->getAddress(); ?></td>
             <td><?php echo $object->getUnitCount(); ?></td>
             <td><?php echo $object->getFreeUnitCount(); ?></td>
-            <td><?php echo $object->getOwners(); ?></td>
-            <td><button class="edit">Bearbeiten</button></td>
+            <td><?php echo $object->getOwnersList(); ?></td>
+            <td>
+				<a href="<?php echo url_for("object/show?id=" . $object->getId()); ?>"><button class="button show">Anzeigen</button></a>
+				<a href="<?php echo url_for("object/edit?id=" . $object->getId()); ?>"><button class="button edit">Bearbeiten</button></a>
+			</td>
         </tr>
     <?php endforeach; ?>
 </table>

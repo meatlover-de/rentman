@@ -41,6 +41,13 @@
                     <?php echo $form['city'] ?>
                 </td>
             </tr>
+            <tr>
+                <th><?php echo $form['objecttype_id']->renderLabel() ?></th>
+                <td>
+                    <?php echo $form['objecttype_id']->renderError() ?>
+                    <?php echo $form['objecttype_id'] ?>
+                </td>
+            </tr>
         </tbody>
     </table>
 </form>

@@ -1,182 +1,210 @@
 Object:
-  actAs:
-    Timestampable: ~
-    Signable: ~
-    Versionable:
-      versionColumn: version
-      className: %CLASS%Version
-      auditLog: true
-  columns:
-    street:
-      type: text
-      notnull: true
-    postcode:
-      type: text
-      notnull: true
-    city:
-      type: text
-      notnull: true
-  relations:
-    Creator:
-      local: created_by
-      foreign: id
-      class: sfGuardUser
-    Editor:
-      local: updated_by
-      foreign: id
-      class: sfGuardUser
+    actAs:
+        Timestampable: ~
+        Signable: ~
+        Versionable:
+            versionColumn: version
+            className: %CLASS%Version
+            auditLog: true
+    columns:
+        street:
+            type: text
+            notnull: true
+        postcode:
+            type: text
+            notnull: true
+        city:
+            type: text
+            notnull: true
+        objecttype_id:
+            type: int(10)
+            notnull: true    
+    relations:
+        Objecttype:
+            local: objecttype_id
+            foreign: id
+        Creator:
+            local: created_by
+            foreign: id
+            class: sfGuardUser
+        Editor:
+            local: updated_by
+            foreign: id
+            class: sfGuardUser
+
+Objecttype:
+    actAs:
+        Timestampable: ~
+        Signable: ~
+        Versionable:
+            versionColumn: version
+            className: %CLASS%Version
+            auditLog: true
+    columns:
+        objecttype:
+            type: string(255)
+            notnull: true
+    relations:
+        Creator:
+            local: created_by
+            foreign: id
+            class: sfGuardUser
+        Editor:
+            local: updated_by
+            foreign: id
+            class: sfGuardUser
 
 Owner:
-  actAs:
-    Timestampable: ~
-    Signable: ~
-    Versionable:
-      versionColumn: version
-      className: %CLASS%Version
-      auditLog: true
-  columns:
-    firstname:
-      type: text
-      notnull: true
-    surname:
-      type: text
-      notnull: true
-    street:
-      type: text
-      notnull: true
-    postcode:
-      type: text
-      notnull: true
-    city:
-      type: text
-      notnull: true
-  relations:
-    Creator:
-      local: created_by
-      foreign: id
-      class: sfGuardUser
-    Editor:
-      local: updated_by
-      foreign: id
-      class: sfGuardUser
+    actAs:
+        Timestampable: ~
+        Signable: ~
+        Versionable:
+            versionColumn: version
+            className: %CLASS%Version
+            auditLog: true
+    columns:
+        firstname:
+            type: text
+            notnull: true
+        surname:
+            type: text
+            notnull: true
+        street:
+            type: text
+            notnull: true
+        postcode:
+            type: text
+            notnull: true
+        city:
+            type: text
+            notnull: true
+    relations:
+        Creator:
+            local: created_by
+            foreign: id
+            class: sfGuardUser
+        Editor:
+            local: updated_by
+            foreign: id
+            class: sfGuardUser
 
 OwnerObject:
-  actAs:
-    Timestampable: ~
-    Signable: ~
-    Versionable:
-      versionColumn: version
-      className: %CLASS%Version
-      auditLog: true
-  columns:
-    owner_id:
-      type: int(10)
-      notnull: true
-    object_id:
-      type: int(10)
-      notnull: true
-  relations:
-    Object:
-      local: object_id
-      foreign: id
-    Owner:
-      local: owner_id
-      foreign: id
-    Creator:
-      local: created_by
-      foreign: id
-      class: sfGuardUser
-    Editor:
-      local: updated_by
-      foreign: id
-      class: sfGuardUser
+    actAs:
+        Timestampable: ~
+        Signable: ~
+        Versionable:
+            versionColumn: version
+            className: %CLASS%Version
+            auditLog: true
+    columns:
+        owner_id:
+            type: int(10)
+            notnull: true
+        object_id:
+            type: int(10)
+            notnull: true
+    relations:
+        Object:
+            local: object_id
+            foreign: id
+        Owner:
+            local: owner_id
+            foreign: id
+        Creator:
+            local: created_by
+            foreign: id
+            class: sfGuardUser
+        Editor:
+            local: updated_by
+            foreign: id
+            class: sfGuardUser
 
 Objectunit:
-  actAs:
-    Timestampable: ~
-    Signable: ~
-    Versionable:
-      versionColumn: version
-      className: %CLASS%Version
-      auditLog: true
-  columns:
-    object_id:
-      type: int(10)
-      notnull: true
-    rooms:
-      type: int(6)
-    rentdeposit:
-      type: float(6,2)
-  relations:
-    Infrastructures:
-      class: UnitInfrastructure
-      local: id
-      type: many
-      foreign: objectunit_id
-    Object:
-      local: object_id
-      foreign: id
-    Creator:
-      local: created_by
-      foreign: id
-      class: sfGuardUser
-    Editor:
-      local: updated_by
-      foreign: id
-      class: sfGuardUser
+    actAs:
+        Timestampable: ~
+        Signable: ~
+        Versionable:
+            versionColumn: version
+            className: %CLASS%Version
+            auditLog: true
+    columns:
+        object_id:
+            type: int(10)
+            notnull: true
+        rooms:
+            type: int(6)
+        rentdeposit:
+            type: float(6,2)
+    relations:
+        Infrastructures:
+            class: UnitInfrastructure
+            local: id
+            type: many
+            foreign: objectunit_id
+        Object:
+            local: object_id
+            foreign: id
+        Creator:
+            local: created_by
+            foreign: id
+            class: sfGuardUser
+        Editor:
+            local: updated_by
+            foreign: id
+            class: sfGuardUser
 
 Infrastructure:
-  actAs:
-    Timestampable: ~
-    Signable: ~
-    Versionable:
-      versionColumn: version
-      className: %CLASS%Version
-      auditLog: true
-  columns:
-    short:
-      type: string(100)
-      notnull: true
-    description:
-      type: text
-      notnull: true
-  relations:
-    Creator:
-      local: created_by
-      foreign: id
-      class: sfGuardUser
-    Editor:
-      local: updated_by
-      foreign: id
-      class: sfGuardUser
+    actAs:
+        Timestampable: ~
+        Signable: ~
+        Versionable:
+            versionColumn: version
+            className: %CLASS%Version
+            auditLog: true
+    columns:
+        short:
+            type: string(100)
+            notnull: true
+        description:
+            type: text
+            notnull: true
+    relations:
+        Creator:
+            local: created_by
+            foreign: id
+            class: sfGuardUser
+        Editor:
+            local: updated_by
+            foreign: id
+            class: sfGuardUser
 
 UnitInfrastructure:
-  actAs:
-    Timestampable: ~
-    Signable: ~
-    Versionable:
-      versionColumn: version
-      className: %CLASS%Version
-      auditLog: true
-  columns:
-    objectunit_id:
-      type: int(10)
-      notnull: true
-    infrastructure_id:
-      type: int(10)
-      notnull: true
-  relations:
-    Infrastructure:
-      local: infrastructure_id
-      foreign: id
-    Objectunit:
-      local: objectunit_id
-      foreign: id
-    Creator:
-      local: created_by
-      foreign: id
-      class: sfGuardUser
-    Editor:
-      local: updated_by
-      foreign: id
-      class: sfGuardUser
+    actAs:
+        Timestampable: ~
+        Signable: ~
+        Versionable:
+            versionColumn: version
+            className: %CLASS%Version
+            auditLog: true
+    columns:
+        objectunit_id:
+            type: int(10)
+            notnull: true
+        infrastructure_id:
+            type: int(10)
+            notnull: true
+    relations:
+        Infrastructure:
+            local: infrastructure_id
+            foreign: id
+        Objectunit:
+            local: objectunit_id
+            foreign: id
+        Creator:
+            local: created_by
+            foreign: id
+            class: sfGuardUser
+        Editor:
+            local: updated_by
+            foreign: id
+            class: sfGuardUser

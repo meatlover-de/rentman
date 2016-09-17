@@ -2,12 +2,20 @@
     <li><a href="#">Home</a></li>
     <li><a href="#" class="dropdown-toggle">Verwaltung</a>
         <ul  class="d-menu" data-role="dropdown">
-            <li><a id="objects">Objekte</a></li>
+            <li><a href="<?php echo url_for("object/index") ?>">Objekte</a></li>
+            <li><a href="<?php echo url_for("owner/index") ?>">Eigentümer</a></li>
         </ul>
     </li>
     <li><a href="#"class="dropdown-toggle">Auswertungen</a>
         <ul  class="d-menu" data-role="dropdown">
-            <li><a href="#">About</a></li>
+            <li><a href="#">Nebenkosten</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#" class="dropdown-toggle">Einstellungen</a>
+        <ul  class="d-menu" data-role="dropdown">
+            <li><a href="<?php echo url_for("objecttype/index") ?>">Objektarten</a></li>
+            <li><a href="<?php echo url_for("infrastructure/index") ?>">Ausstattungen</a></li>
         </ul>
     </li>
     <li>
@@ -18,9 +26,9 @@
         </ul>
     </li>
     <li class="place-right no-hovered">
-        <form>
+        <form action="<?php echo url_for("search/index"); ?>" method="post">
             <div class="input-control text" style="width: 250px; margin-right: 10px">
-                <input type="text" placeholder="Suchen...">
+                <input name="search" type="text" placeholder="Suchen...">
                 <button class="button"><span class="mif-search"></span></button>
             </div>
         </form>
@@ -32,6 +40,24 @@
     $("#objects").click(function () {
         $.ajax({
             url: '<?php echo url_for("object/list") ?>',
+            dataType: "html",
+            success: function (data) {
+                $('div.main').html("").html(data);
+            }
+        });
+    });
+    $("#objecttypes").click(function () {
+        $.ajax({
+            url: '<?php echo url_for("objecttype/list") ?>',
+            dataType: "html",
+            success: function (data) {
+                $('div.main').html("").html(data);
+            }
+        });
+    });
+    $("#infrastructure").click(function () {
+        $.ajax({
+            url: '<?php echo url_for("infrastructure/show") ?>',
             dataType: "html",
             success: function (data) {
                 $('div.main').html("").html(data);

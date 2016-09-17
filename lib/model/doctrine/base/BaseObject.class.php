@@ -8,25 +8,31 @@
  * @property text $street
  * @property text $postcode
  * @property text $city
+ * @property int $objecttype_id
+ * @property Objecttype $Objecttype
  * @property sfGuardUser $Creator
  * @property sfGuardUser $Editor
  * @property Doctrine_Collection $OwnerObject
  * @property Doctrine_Collection $Objectunit
  * 
- * @method text                getStreet()      Returns the current record's "street" value
- * @method text                getPostcode()    Returns the current record's "postcode" value
- * @method text                getCity()        Returns the current record's "city" value
- * @method sfGuardUser         getCreator()     Returns the current record's "Creator" value
- * @method sfGuardUser         getEditor()      Returns the current record's "Editor" value
- * @method Doctrine_Collection getOwnerObject() Returns the current record's "OwnerObject" collection
- * @method Doctrine_Collection getObjectunit()  Returns the current record's "Objectunit" collection
- * @method Object              setStreet()      Sets the current record's "street" value
- * @method Object              setPostcode()    Sets the current record's "postcode" value
- * @method Object              setCity()        Sets the current record's "city" value
- * @method Object              setCreator()     Sets the current record's "Creator" value
- * @method Object              setEditor()      Sets the current record's "Editor" value
- * @method Object              setOwnerObject() Sets the current record's "OwnerObject" collection
- * @method Object              setObjectunit()  Sets the current record's "Objectunit" collection
+ * @method text                getStreet()        Returns the current record's "street" value
+ * @method text                getPostcode()      Returns the current record's "postcode" value
+ * @method text                getCity()          Returns the current record's "city" value
+ * @method int                 getObjecttypeId()  Returns the current record's "objecttype_id" value
+ * @method Objecttype          getObjecttype()    Returns the current record's "Objecttype" value
+ * @method sfGuardUser         getCreator()       Returns the current record's "Creator" value
+ * @method sfGuardUser         getEditor()        Returns the current record's "Editor" value
+ * @method Doctrine_Collection getOwnerObject()   Returns the current record's "OwnerObject" collection
+ * @method Doctrine_Collection getObjectunit()    Returns the current record's "Objectunit" collection
+ * @method Object              setStreet()        Sets the current record's "street" value
+ * @method Object              setPostcode()      Sets the current record's "postcode" value
+ * @method Object              setCity()          Sets the current record's "city" value
+ * @method Object              setObjecttypeId()  Sets the current record's "objecttype_id" value
+ * @method Object              setObjecttype()    Sets the current record's "Objecttype" value
+ * @method Object              setCreator()       Sets the current record's "Creator" value
+ * @method Object              setEditor()        Sets the current record's "Editor" value
+ * @method Object              setOwnerObject()   Sets the current record's "OwnerObject" collection
+ * @method Object              setObjectunit()    Sets the current record's "Objectunit" collection
  * 
  * @package    rentman
  * @subpackage model
@@ -50,11 +56,20 @@ abstract class BaseObject extends sfDoctrineRecord
              'type' => 'text',
              'notnull' => true,
              ));
+        $this->hasColumn('objecttype_id', 'int', 10, array(
+             'type' => 'int',
+             'notnull' => true,
+             'length' => 10,
+             ));
     }
 
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('Objecttype', array(
+             'local' => 'objecttype_id',
+             'foreign' => 'id'));
+
         $this->hasOne('sfGuardUser as Creator', array(
              'local' => 'created_by',
              'foreign' => 'id'));

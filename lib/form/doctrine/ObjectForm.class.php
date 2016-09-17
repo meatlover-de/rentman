@@ -14,6 +14,15 @@ class ObjectForm extends BaseObjectForm {
         unset($this['created_at'], $this['updated_at']);
         unset($this['created_by'], $this['updated_by']);
         unset($this['version']);
+		
+		$choices = array();
+		$ots = Doctrine_Core::getTable("Objecttype")->createQuery("ot")->orderBy("ot.objecttype")->execute();
+		foreach ($ots as $ot) {
+			$choices[$ot->getId()] = $ot->getObjecttype();
+		}
+		$this->setWidget("objecttype_id", new sfWidgetFormChoice(
+		    array("choices" => $choices)
+		));
     }
 
 }

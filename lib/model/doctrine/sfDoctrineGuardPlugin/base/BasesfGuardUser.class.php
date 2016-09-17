@@ -22,6 +22,7 @@
  * @property sfGuardRememberKey $RememberKeys
  * @property sfGuardForgotPassword $ForgotPassword
  * @property Doctrine_Collection $Object
+ * @property Doctrine_Collection $Objecttype
  * @property Doctrine_Collection $Owner
  * @property Doctrine_Collection $OwnerObject
  * @property Doctrine_Collection $Objectunit
@@ -45,6 +46,7 @@
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
  * @method sfGuardForgotPassword getForgotPassword()        Returns the current record's "ForgotPassword" value
  * @method Doctrine_Collection   getObject()                Returns the current record's "Object" collection
+ * @method Doctrine_Collection   getObjecttype()            Returns the current record's "Objecttype" collection
  * @method Doctrine_Collection   getOwner()                 Returns the current record's "Owner" collection
  * @method Doctrine_Collection   getOwnerObject()           Returns the current record's "OwnerObject" collection
  * @method Doctrine_Collection   getObjectunit()            Returns the current record's "Objectunit" collection
@@ -67,6 +69,7 @@
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
  * @method sfGuardUser           setForgotPassword()        Sets the current record's "ForgotPassword" value
  * @method sfGuardUser           setObject()                Sets the current record's "Object" collection
+ * @method sfGuardUser           setObjecttype()            Sets the current record's "Objecttype" collection
  * @method sfGuardUser           setOwner()                 Sets the current record's "Owner" collection
  * @method sfGuardUser           setOwnerObject()           Sets the current record's "OwnerObject" collection
  * @method sfGuardUser           setObjectunit()            Sets the current record's "Objectunit" collection
@@ -168,6 +171,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'foreign' => 'user_id'));
 
         $this->hasMany('Object', array(
+             'local' => 'id',
+             'foreign' => 'created_by'));
+
+        $this->hasMany('Objecttype', array(
              'local' => 'id',
              'foreign' => 'created_by'));
 

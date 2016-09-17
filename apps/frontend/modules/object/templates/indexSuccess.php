@@ -1,34 +1,25 @@
-<h1>Objects List</h1>
-
-<table>
-  <thead>
+<h1>Mietobjekte</h1>
+<table class="table striped hovered cell-hovered border bordered">
     <tr>
-      <th>Id</th>
-      <th>Street</th>
-      <th>Postcode</th>
-      <th>City</th>
-      <th>Created at</th>
-      <th>Updated at</th>
-      <th>Created by</th>
-      <th>Updated by</th>
-      <th>Version</th>
+        <th>ID</th>
+        <th>Adresse</th>
+        <th>Einheiten</th>
+        <th>Frei</th>
+        <th>Besitzer</th>
+        <th>Aktion</th>
     </tr>
-  </thead>
-  <tbody>
     <?php foreach ($objects as $object): ?>
-    <tr>
-      <td><a href="<?php echo url_for('object/show?id='.$object->getId()) ?>"><?php echo $object->getId() ?></a></td>
-      <td><?php echo $object->getStreet() ?></td>
-      <td><?php echo $object->getPostcode() ?></td>
-      <td><?php echo $object->getCity() ?></td>
-      <td><?php echo $object->getCreatedAt() ?></td>
-      <td><?php echo $object->getUpdatedAt() ?></td>
-      <td><?php echo $object->getCreatedBy() ?></td>
-      <td><?php echo $object->getUpdatedBy() ?></td>
-      <td><?php echo $object->getVersion() ?></td>
-    </tr>
+        <tr>
+            <td><?php echo $object->getId(); ?></td>
+            <td><?php echo $object->getAddress(); ?></td>
+            <td><?php echo $object->getUnitCount(); ?></td>
+            <td><?php echo $object->getFreeUnitCount(); ?></td>
+            <td><?php echo $object->getOwnersList(); ?></td>
+            <td>
+				<a href="<?php echo url_for("object/show?id=" . $object->getId()); ?>"><button class="button show">Anzeigen</button></a>
+				<a href="<?php echo url_for("object/edit?id=" . $object->getId()); ?>"><button class="button edit">Bearbeiten</button></a>
+			</td>
+        </tr>
     <?php endforeach; ?>
-  </tbody>
 </table>
-
-  <a href="<?php echo url_for('object/new') ?>">New</a>
+<a href="<?php echo url_for("object/new") ?>"><button class="button new">Neu</button></a>

@@ -12,6 +12,10 @@
  */
 class Object extends BaseObject {
 
+    public function __toString() {
+    	return $this->getStreet() . ", " . $this->getCity();
+    }
+	
     public function getAddress() {
         return $this->getStreet() . ", " . $this->getPostcode() . " " . $this->getCity();
     }
@@ -25,7 +29,7 @@ class Object extends BaseObject {
     }
 
     public function getOwners() {
-        $ownerObjects = Doctrine_Core::getTable("OwnerObject")->findAllByObjectId($this->getId());
+        $ownerObjects = Doctrine_Core::getTable("OwnerObject")->findByObjectId($this->getId());
         $owners = array();
         foreach ($ownerObjects as $oo) {
             $owners[] = $oo->getOwner();
@@ -33,4 +37,15 @@ class Object extends BaseObject {
         return $owners;
     }
 
+	public function getOwnersList() {
+		$owners = $this->getOwners();
+		$list = "";
+		foreach ($owners as $owner) {
+			$list .= $owner . "<br>";
+		}
+	}
+    
+    public function getInfrastructures() {
+        return array();
+    }
 }

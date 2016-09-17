@@ -15,27 +15,29 @@ abstract class BaseObjectForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'         => new sfWidgetFormInputHidden(),
-      'street'     => new sfWidgetFormInputText(),
-      'postcode'   => new sfWidgetFormInputText(),
-      'city'       => new sfWidgetFormInputText(),
-      'created_at' => new sfWidgetFormDateTime(),
-      'updated_at' => new sfWidgetFormDateTime(),
-      'created_by' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Creator'), 'add_empty' => true)),
-      'updated_by' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Editor'), 'add_empty' => true)),
-      'version'    => new sfWidgetFormInputText(),
+      'id'            => new sfWidgetFormInputHidden(),
+      'street'        => new sfWidgetFormInputText(),
+      'postcode'      => new sfWidgetFormInputText(),
+      'city'          => new sfWidgetFormInputText(),
+      'objecttype_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Objecttype'), 'add_empty' => false)),
+      'created_at'    => new sfWidgetFormDateTime(),
+      'updated_at'    => new sfWidgetFormDateTime(),
+      'created_by'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Creator'), 'add_empty' => true)),
+      'updated_by'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Editor'), 'add_empty' => true)),
+      'version'       => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
-      'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'street'     => new sfValidatorPass(),
-      'postcode'   => new sfValidatorPass(),
-      'city'       => new sfValidatorPass(),
-      'created_at' => new sfValidatorDateTime(),
-      'updated_at' => new sfValidatorDateTime(),
-      'created_by' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Creator'), 'required' => false)),
-      'updated_by' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Editor'), 'required' => false)),
-      'version'    => new sfValidatorInteger(array('required' => false)),
+      'id'            => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'street'        => new sfValidatorPass(),
+      'postcode'      => new sfValidatorPass(),
+      'city'          => new sfValidatorPass(),
+      'objecttype_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Objecttype'))),
+      'created_at'    => new sfValidatorDateTime(),
+      'updated_at'    => new sfValidatorDateTime(),
+      'created_by'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Creator'), 'required' => false)),
+      'updated_by'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Editor'), 'required' => false)),
+      'version'       => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('object[%s]');
